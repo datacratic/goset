@@ -49,3 +49,16 @@ func Example_Operands() {
 	// x.Intersect(y): { b c }
 	// x.Difference(y): { a }
 }
+
+func Example_Types() {
+
+	unsigned := set.NewUint(uint64(1), uint64(2), uint64(3))
+	fmt.Println("unsigned:", unsigned)
+
+	signed := set.NewInt(int64(-1), int64(-2), int64(-3))
+	fmt.Println("signed:", signed)
+
+	// Output:
+	// unsigned: { 1 2 3 }
+	// signed: { -3 -2 -1 }
+}
