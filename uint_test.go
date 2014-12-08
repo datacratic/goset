@@ -6,8 +6,8 @@ import (
 	"testing"
 )
 
-func testUintUintersect(t *testing.T, title string, aSet, bSet, exp Uint) {
-	result := aSet.Uintersect(bSet)
+func testUuintIntersect(t *testing.T, title string, aSet, bSet, exp Uint) {
+	result := aSet.Intersect(bSet)
 
 	t.Logf("%s: %s U %s = %s ?= %s", title, aSet, bSet, result, exp)
 
@@ -24,34 +24,34 @@ func testUintUintersect(t *testing.T, title string, aSet, bSet, exp Uint) {
 	}
 }
 
-func intUintersect(t *testing.T, title string, a, b, exp Uint) {
-	testUintUintersect(t, title, a, b, exp)
-	testUintUintersect(t, title, b, a, exp)
+func uintIntersect(t *testing.T, title string, a, b, exp Uint) {
+	testUuintIntersect(t, title, a, b, exp)
+	testUuintIntersect(t, title, b, a, exp)
 }
 
-func TestUintUintersect(t *testing.T) {
-	intUintersect(t, "empty",
+func TestUuintIntersect(t *testing.T) {
+	uintIntersect(t, "empty",
 		NewUint(uint64(1), uint64(2), uint64(3), uint64(4)),
 		NewUint(),
 		NewUint())
 
-	intUintersect(t, "overlap",
+	uintIntersect(t, "overlap",
 		NewUint(uint64(1), uint64(2), uint64(3), uint64(4)),
 		NewUint(uint64(3), uint64(4), uint64(5), uint64(6)),
 		NewUint(uint64(3), uint64(4)))
 
-	intUintersect(t, "subset",
+	uintIntersect(t, "subset",
 		NewUint(uint64(1), uint64(2), uint64(3), uint64(4)),
 		NewUint(uint64(1), uint64(2)),
 		NewUint(uint64(1), uint64(2)))
 
-	intUintersect(t, "total",
+	uintIntersect(t, "total",
 		NewUint(uint64(1), uint64(2), uint64(3), uint64(4)),
 		NewUint(uint64(1), uint64(2), uint64(3), uint64(4)),
 		NewUint(uint64(1), uint64(2), uint64(3), uint64(4)))
 }
 
-func benchUintUintersect(bench *testing.B, n, m int) {
+func benchUuintIntersect(bench *testing.B, n, m int) {
 	a, b := NewUint(), NewUint()
 
 	for i := 0; i < n; i++ {
@@ -69,18 +69,18 @@ func benchUintUintersect(bench *testing.B, n, m int) {
 
 	bench.ResetTimer()
 	for i := 0; i < bench.N; i++ {
-		a.Uintersect(b)
+		a.Intersect(b)
 	}
 }
 
-func BenchmarkUintUintersectSmallSmall(b *testing.B) {
-	benchUintUintersect(b, 10, 10)
+func BenchmarkUuintIntersectSmallSmall(b *testing.B) {
+	benchUuintIntersect(b, 10, 10)
 }
 
-func BenchmarkUintUintersectBigSmall(b *testing.B) {
-	benchUintUintersect(b, 10, 1000)
+func BenchmarkUuintIntersectBigSmall(b *testing.B) {
+	benchUuintIntersect(b, 10, 1000)
 }
 
-func BenchmarkUintUintersectBigBig(b *testing.B) {
-	benchUintUintersect(b, 1000, 1000)
+func BenchmarkUuintIntersectBigBig(b *testing.B) {
+	benchUuintIntersect(b, 1000, 1000)
 }

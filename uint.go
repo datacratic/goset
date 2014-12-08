@@ -73,8 +73,8 @@ func (set Uint) Union(other Uint) Uint {
 	return result
 }
 
-// Uintersect returns a set consisting of the values present in both sets.
-func (set Uint) Uintersect(other Uint) Uint {
+// Intersect returns a set consisting of the values present in both sets.
+func (set Uint) Intersect(other Uint) Uint {
 	var big, small Uint
 	if len(set) < len(other) {
 		big = other
